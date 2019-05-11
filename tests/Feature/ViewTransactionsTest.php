@@ -5,18 +5,18 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class ViewTransactionsTest extends TestCase
 {
+    use DatabaseMigrations;
     /**
-     * A basic feature test example.
-     *
-     * @return void
+     * @test
      */
-    public function testExample()
+    public function it_can_display_all_transactions()
     {
-        $response = $this->get('/');
-
-        $response->assertStatus(200);
+        $transaction = factory('App\Transaction')->create();
+        $this->get('/transactions')
+        ->assertSee($transaction->description);
     }
 }
