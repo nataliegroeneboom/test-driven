@@ -11,13 +11,16 @@ $factory->define(Transaction::class, function (Faker $faker) {
     return [
       'description' => $faker->sentence(2),
       'category_id' => function() {
-          return factory(App\Category::class)->create()->id;
+          return create(App\Category::class)->id;
       }
     ];
 });
 
 $factory->define(App\Category::class, function (Faker $faker) {
+  $name = $faker->word;
+  
   return [
-    'name' => $faker->word
+    'name' => $name,
+    'slug' => str_slug($name)
   ];
 });
