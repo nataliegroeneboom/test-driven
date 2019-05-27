@@ -16,12 +16,12 @@ abstract class TestCase extends BaseTestCase
         parent::setUp();
         $this->disableExceptionHandling();
     }
-    protected function disableExceptionHandling ()
+    protected function disableExceptionHandling()
     {
         $this->oldExceptionHandler = app()->make(ExceptionHandler::class);
         app()->instance(ExceptionHandler::class, new PassThroughHandler);
     }
-    protected function withExceptionHandling ()
+    protected function withExceptionHandling()
     {
         app()->instance(ExceptionHandler::class, $this->oldExceptionHandler);
         return $this;
