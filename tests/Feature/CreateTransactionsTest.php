@@ -16,7 +16,8 @@ class CreateTransactionsTest extends TestCase
      */
     public function it_can_create_transactions()
     {
-        $transaction = $this->make('App\Transaction');
+        $category = $this->create('App\Category');
+        $transaction = $this->make('App\Transaction', ['category_id' => $category->id]);
         $this->post('/transactions', $transaction->toArray())
         ->assertRedirect('/transactions');
 

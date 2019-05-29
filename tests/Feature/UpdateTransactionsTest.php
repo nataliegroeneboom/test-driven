@@ -15,8 +15,9 @@ class UpdateTransactionsTest extends TestCase
      */
     public function it_can_update_transactions()
     {
+        $category = $this->create('App\Category');
         $transaction = $this->create('App\Transaction');
-        $newTransaction = $this->make('App\Transaction');
+        $newTransaction = $this->make('App\Transaction', ['category_id' => $category->id]);
 
         $this->put("/transactions/{$transaction->id}", $newTransaction->toArray())
         ->assertRedirect('/transactions');

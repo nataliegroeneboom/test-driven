@@ -14,14 +14,12 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/transactions/create', 'TransactionsController@create');
-Route::post('/transactions', 'TransactionsController@store');
-Route::put('/transactions/{transaction}', 'TransactionsController@update');
 
-Route::delete('transactions/{transaction}', 'TransactionsController@destroy');
+Route::resource('/transactions', 'TransactionsController', ['except' => ['show']]);
+Route::resource('/categories', 'CategoriesController');
+Route::resource('budgets', 'BudgetsController', ['except' => ['show']]);
 
-Route::get('/transactions/{category?}', 'TransactionsController@index');
-Route::get('/transactions/{transaction}', 'TransactionsController@edit');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/transactions/{category?}', 'TransactionsController@index');

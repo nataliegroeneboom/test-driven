@@ -29,6 +29,7 @@ class TransactionsController extends Controller
         }
         
         $transactions = $transactionsQuery->paginate();
+  
 
         return view('transactions.index', compact('transactions', 'currentMonth'));
     }

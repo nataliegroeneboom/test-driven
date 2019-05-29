@@ -16,7 +16,7 @@ abstract class TestCase extends BaseTestCase
     protected function setUp ():void
     {
         parent::setUp();
-        $this->user = create('App\User');
+        $this->user = factory(User::class)->create(['id' => 2]);
         $this->signIn($this->user)
         ->disableExceptionHandling();
     }
@@ -43,7 +43,7 @@ abstract class TestCase extends BaseTestCase
         return make($class, array_merge(['user_id' => $this->user->id], $overrides), $times);
     }
     protected function create($class, $overrides = [], $times = null){
-        return create($class, array_merge(['user_id' => $this->user->id], $overrides), $times);
+        return create($class, array_merge(['user_id' => 2], $overrides), $times);
     }
 }
 class PassThroughHandler extends Handler
