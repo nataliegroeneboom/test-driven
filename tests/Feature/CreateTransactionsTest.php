@@ -16,7 +16,7 @@ class CreateTransactionsTest extends TestCase
      */
     public function it_can_create_transactions()
     {
-        $transaction = make('App\Transaction');
+        $transaction = $this->make('App\Transaction');
         $this->post('/transactions', $transaction->toArray())
         ->assertRedirect('/transactions');
 
@@ -57,8 +57,18 @@ class CreateTransactionsTest extends TestCase
      */
     public function it_cannot_create_transactions_without_a_valid_amount()
     {
-        $this->postTransaction(['amount' => 'null'])
+        $this->postTransaction(['amount' => null])
         ->assertSessionHasErrors('amount');   
+        
+    }
+
+      /**
+     * @test
+     */
+    public function it_cannot_create_transactions_without_a_valid_category()
+    {
+        $this->postTransaction(['category_id' => null])
+        ->assertSessionHasErrors('category_id');   
         
     }
 
