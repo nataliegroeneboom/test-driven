@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    public $fillable = ['name', 'slug', 'user_id'];
+    protected $guarded = [];
    public static function boot(){
      parent::boot();
      static::addGlobalScope('user', function($query){  

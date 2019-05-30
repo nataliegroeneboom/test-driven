@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Route::resource('/transactions', 'TransactionsController', ['except' => ['show']]);
 Route::resource('/categories', 'CategoriesController');
-Route::resource('budgets', 'BudgetsController', ['except' => ['show']]);
+Route::resource('/budgets', 'BudgetsController');
 
 Auth::routes();
 

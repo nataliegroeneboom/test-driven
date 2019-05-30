@@ -8,13 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Transaction extends Model
 {
-    public $fillable = ['description', 'category_id', 'amount', 'user_id'];
+    protected $guarded = [];
 
     public static function boot()
     {
         parent::boot(); 
         static::addGlobalScope('user', function($query){  
-           $query->where('user_id', auth()->id()); 
+           $query->where('user_id', auth()->id())->with('category'); 
         });
         
         static::saving(function($transaction){

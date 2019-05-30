@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\User;
 use App\Category;
 use Tests\TestCase;
 use Illuminate\Support\Facades\App;
@@ -32,15 +33,13 @@ class ViewCategoriesTest extends TestCase
         ->assertRedirect('/login');
     }
 
-    /**
-     * @test
-     */
+    
     public function it_only_displays_categories_that_belong_to_currently_logged_in_user()
     {
         $otherUser = create('App\User');
-        $category = $this->create('App\Category');
+        $category = $this->create('App\Category', ['user_id' => $this->user->id]);
    
-        $otherCategory = $this->create('App\Category', ['user_id' => 3]);
+        $otherCategory = $this->create('App\Category', ['user_id', $otherUser->id]);
 
         $this->get('/categories')
         ->assertSee($category->name)

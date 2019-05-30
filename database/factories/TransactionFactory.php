@@ -2,6 +2,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 use App\User;
+use App\Budget;
 use App\Category;
 use App\Transaction;
 use Illuminate\Support\Str;
@@ -33,18 +34,16 @@ $factory->define(App\Category::class, function (Faker $faker) {
   ];
 });
 
-
-$factory->define(App\Budget::class, function (Faker $faker) {
-  $name = $faker->word;
-  
+$factory->define(App\Budget::class, function (Faker $faker){
   return [
-    'category_id' => function() {
+    'category_id' =>  function() {
       return create(App\Category::class)->id;
-       },
-    'user_id' => function(){
-      return create(App\User::class)->id;
-    },
-    'amount' => $faker->randomFloat(2, 500, 1000),
-    'budget_date' => \Carbon\Carbon::now()
-  ];
+      },
+      'user_id' => function(){
+        return create(App\User::class)->id;
+      },
+      'amount' => $faker->randomFloat(2, 500, 1000),
+      'budget_date' => \Carbon\Carbon::now()->format('M')
+      ];
 });
+
